@@ -1,20 +1,10 @@
-import { getQueryClient, trpc } from '@/trpc/server'
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
-import React from 'react'
-import { Client } from './client'
+import { requireAuth } from "@/lib/auth-utils";
+import { caller } from "@/trpc/server";
 
-const Page = () => {
-  const queryClient = getQueryClient();
+const Page = async () => {
+  await requireAuth();
 
-  void queryClient.prefetchQuery(trpc.getUsers.queryOptions())
+  return <div className="">Protected Server component</div>;
+};
 
-  return (
-    <div className=''>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <Client />
-      </HydrationBoundary>
-    </div>
-  )
-}
-
-export default Page
+export default Page;
