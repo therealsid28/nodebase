@@ -1,9 +1,9 @@
-import AuthLayout from "@/features/auth/components/auth-layout";
 import { LoginForm } from "@/features/auth/components/login-form";
+import { requireUnAuth } from "@/lib/auth-utils";
 import React from "react";
 
 const Page = async () => {
-  // await requireUnAuth();
+  await requireUnAuth();
   return <LoginForm />;
 };
 
